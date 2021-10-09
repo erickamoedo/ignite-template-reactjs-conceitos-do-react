@@ -36,20 +36,18 @@ export function TaskList() {
   }
 
   function handleToggleTaskCompletion(id: number) {
-
     
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
 
     // estou filtrando as tasks
-    const mapeandoTask = tasks.map(task => ({...task}))
-
-    // agora eu vou comparar com o ID dentro da lista mapeada
-    const encontradoTask = mapeandoTask.find(item => item.id === id)
-
-    if(!mapeandoTask)
-    return;
-    mapeandoTask.Task.isComplete = !mapeandoTask.isComplete
-
+    const mapeandoTask = tasks.map(task => task.id === id ? {
+      ...task, // eu pego as tasks
+      isComplete: !task.isComplete // e inverto ela (como ela começa em negativa, entao fica true )
+    } : task // e se o task.id for diferente do id, entao ele mantem o false mesmo.
+    
+    );
+    
+    setTasks(mapeandoTask) // aquui eu passo o novo valor para o estado, se ele está true ou false
 
 
   
