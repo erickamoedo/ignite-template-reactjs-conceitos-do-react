@@ -10,6 +10,8 @@ interface Task {
   isComplete: boolean;
 }
 
+
+
 export function TaskList() {
   const [tasks, setTasks] = useState<Task[]>([]);
   const [newTaskTitle, setNewTaskTitle] = useState("");
@@ -17,6 +19,7 @@ export function TaskList() {
   function handleCreateNewTask() {
     // Crie uma nova task com um id random, não permita criar caso o título seja vazio.
 
+ 
     if (newTaskTitle === "") {
       return;
     } else {
@@ -28,13 +31,28 @@ export function TaskList() {
 
       // aqui eu pego todos os valores e coloco em uma matriz
       setTasks((oldState) => [...oldState, data]);
+      setNewTaskTitle('')
     }
   }
 
   function handleToggleTaskCompletion(id: number) {
+
+    
     // Altere entre `true` ou `false` o campo `isComplete` de uma task com dado ID
 
-    console.log(id);
+    // estou filtrando as tasks
+    const mapeandoTask = tasks.map(task => ({...task}))
+
+    // agora eu vou comparar com o ID dentro da lista mapeada
+    const encontradoTask = mapeandoTask.find(item => item.id === id)
+
+    if(!mapeandoTask)
+    return;
+    mapeandoTask.Task.isComplete = !mapeandoTask.isComplete
+
+
+
+  
   }
 
   function handleRemoveTask(id: number) {
@@ -44,7 +62,7 @@ export function TaskList() {
   return (
     <section className="task-list container">
       <header>
-        <h2>Minhas tasks</h2>
+        <h2>Minhas tasks </h2>
 
         <div className="input-group">
           <input
