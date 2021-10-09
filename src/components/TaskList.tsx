@@ -48,13 +48,18 @@ export function TaskList() {
     );
     
     setTasks(mapeandoTask) // aquui eu passo o novo valor para o estado, se ele está true ou false
-
-
   
   }
 
   function handleRemoveTask(id: number) {
     // Remova uma task da listagem pelo ID
+
+    const remove = tasks.filter(task => task.id !== id) // ele filtra as tasks pelo ID e pede pra manter só as que nao forem o ID removido
+
+    setTasks(remove)
+
+
+
   }
 
   return (
